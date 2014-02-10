@@ -1,0 +1,46 @@
+@(entryForm: Form[(String, String)])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+    New blog entry
+}
+
+
+@main(title, nav = "newEntry") {
+
+@if(entryForm.hasErrors) {
+    <div class="alert-message error">
+        <p><strong>Oops</strong> Please fix all errors</p>
+    </div>
+}
+
+@helper.form(action = routes.Blog.create) {
+
+<fieldset>
+
+    @inputText(
+    entryForm("title"),
+    '_label -> "Title",
+    'class -> "span8"
+    )
+
+    @textarea(
+      entryForm("content"),
+      '_label -> "Content",
+      'rows -> 6,
+      'cols -> 200,
+    'class -> "span10"
+    )
+
+</fieldset>
+
+
+<div class="actions">
+    <input type="submit" class="btn primary" value="Save">
+    <a href="@routes.Application.index" class="btn">Cancel</a>
+</div>
+
+}
+}

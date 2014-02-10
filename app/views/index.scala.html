@@ -1,0 +1,30 @@
+@(entries: Seq[BlogEntry])
+@import views.html.helper.MarkdownParser._
+
+@title = {
+    This blog has @entries.size entries
+}
+
+@main(title) {
+
+    @entries.map { entry =>
+        <div class="entry">
+            <h2><a href="@routes.Blog.show(entry.id.get, entry.title)">@entry.title</a></h2>
+            <p class="entry-content">@parseMarkdown(entry.content)</p>
+
+            <div class="metadata">
+                <div class="author">
+                    <b>Author</b><br />
+                    Yuriy Zavada
+                </div>
+                <div class="date"><b>Published</b><br />@entry.date.format("yyyy-MM-dd HH:mm:ss")</div>
+                <div class="tags">
+                    <b>Tags</b><br />
+                    not implemented yet
+                    <!--<a href="#">scala</a>, <a href="#">play</a>, <a href="#">omegapoint</a>, <a href="#">team web</a>-->
+                </div>
+            </div>
+        </div>
+    }
+    
+}

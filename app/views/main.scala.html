@@ -1,0 +1,52 @@
+@(title: Html, nav: String = "")(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Let's Play Blog</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    </head>
+    <body>
+
+        <div class="topbar">
+            <div class="fill">
+                    <a class="brand" href="@routes.Application.index()">Let's Play Blog</a>
+<!--                    <ul class="nav">
+                        <li class="@("active".when(nav == "newEntry"))">
+                            <a href="@routes.Blog.newEntry">New entry</a>
+                        </li>
+                        <li class="@("active".when(nav == "signup"))">
+                            <a href="@routes.SignUp.form">Sign up</a>
+                        </li>
+                    </ul>-->
+            </div>
+        </div>
+        <div class="allbody">
+        <div class="container">
+
+            <div class="content">
+
+                <div class="page-header">
+                    <h1>@title</h1>
+                </div>
+
+                <div class="row">
+                    <div class="span14">
+                        @content
+                    </div>
+                </div>
+                
+            </div>
+
+            <footer>
+
+            </footer>
+
+        </div>
+        </div>
+        
+    </body>
+</html>

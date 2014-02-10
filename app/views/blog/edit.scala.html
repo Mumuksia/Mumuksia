@@ -1,0 +1,43 @@
+@(entry: BlogEntry, entryForm: Form[(String, String)])        
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+    Edit blog entry
+}
+
+
+@main(title, nav = "newEntry") {
+
+
+@helper.form(action = routes.Blog.update(entry.id.get)) {
+
+<fieldset>
+
+    @inputText(
+    entryForm("title"),
+    '_label -> "Title",
+    'class -> "span8",
+    'value -> "@entry.title"
+    )
+
+    @textarea(
+      entryForm("content"),
+      '_label -> "Content",
+      'rows -> 6,
+      'cols -> 200,
+    'class -> "span10",
+    'value -> "@entry.content"
+    )
+
+</fieldset>
+
+
+<div class="actions">
+    <input type="submit" class="btn primary" value="Save">
+    <a href="@routes.Application.index" class="btn">Cancel</a>
+</div>
+
+}
+}

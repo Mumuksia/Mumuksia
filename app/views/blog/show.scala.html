@@ -1,0 +1,69 @@
+@(entry: BlogEntry, commentForm : Form[(String, String)], comments : Seq[CommentEntry])(implicit request: RequestHeader)
+
+@import views.html.helper.MarkdownParser._
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+    @entry.title - <em>@entry.date.format("yyyy-MM-dd HH:mm")</em>
+}
+
+@main(title, nav = "blog") {
+    @parseMarkdown(entry.content)
+}
+    <div class="actions">
+        <a href="@routes.Blog.edit(entry.id.get)" class="btn">Edit entry</a>
+    </div>
+    
+
+
+
+
+    <hr />
+   <div class="new-comment-box">
+   <strong>Comments</strong><br />
+   <ul>
+		@comments.map { comment =>
+			<li style="list-style-type: none; margin-bottom: 1em; border-style: dashed; border-bottom-width: 1px; border-color: #ddddff">
+				<div class="comment username" style="font-style: italic;">@comment.username says:</div>
+				<div class="comment text" style="margin-left: 1em;">@comment.text</div>
+				
+			</li>
+   		}
+   </ul>
+    
+    @if(request.method == "POST" && !commentForm.hasErrors) {
+      <span class="comment success">Your comment has been posted.</span>
+    } else {
+    	<hr />
+		@if(commentForm.hasErrors) {
+			<div class="alert-message error">
+			<p><strong>Oops</strong> Please fix all errors</p>
+			</div>
+		}
+			
+		@helper.form(action = routes.Blog.addComment(entry.id.get, entry.title)) {
+					
+			<fieldset>
+			@inputText(
+				commentForm("username"),
+				'_label -> "Name",
+				'class -> "span3"
+			)
+			@textarea(
+				commentForm("text"),
+				'_label -> "Comment",
+				'rows -> 4,
+				'cols -> 120,
+				'class -> "span8"
+			)
+			</fieldset>
+									
+			<div class="actions">
+        		<input type="submit" class="btn primary" value="Post comment">
+			</div>
+		}
+    </div>
+   }
+
+
