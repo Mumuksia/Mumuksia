@@ -11,10 +11,6 @@ import models._
 import java.util.Date
 import anorm.{Id, NotAssigned}
 
-/**
- * Author: mange
- * Created: 2012-04-09
- */
 
 object Blog extends Controller {
 

@@ -6,11 +6,6 @@ import play.api.db.DB
 import anorm._
 import anorm.SqlParser._
 
-/**
- * Author: mange
- * Created: 2012-04-09
- */
-
 case class BlogEntry(id: Pk[Long], title:String, content:String, date:Date)
 
 object BlogEntry {

@@ -6,10 +6,6 @@ import play.api.db.DB
 import anorm._
 import anorm.SqlParser._
 
-/**
- * Author: mange
- * Created: 2012-04-09
- */
 
 case class CommentEntry(id: Pk[Long], text:String, username:String, date:Date)
 
